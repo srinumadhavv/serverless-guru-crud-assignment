@@ -1,0 +1,15 @@
+name: update-user-${self:provider.stage}
+handler: src/lambdas/updateUser/index.handler
+layers:
+  - { "Ref":  NodejsLambdaLayer}
+events: #this event will trigger defined lambda here to make api call for updating the User info
+  - http:
+      path: /User/{userId}
+      method: PUT
+      cors: true
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:UpdateItem
+    Resource:
+      - { Fn::GetAtt: [UserTable, Arn] }

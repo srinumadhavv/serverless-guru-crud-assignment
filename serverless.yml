@@ -1,0 +1,45 @@
+service: serverless-guru-crud-app
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: us-east-1
+  stage: ${opt:stage ,'dev'} 
+  environment:
+    USER_TABLE: {"Ref": UserTable}
+
+package:
+  individually: true # package individual lambda 
+  patterns:
+    - '!screenshots/**'
+    - '!layers/**'
+    - '!node_modules/**'
+    - '!package.json'
+
+# provide individual permission for lambda 
+plugins:
+  - serverless-iam-roles-per-function
+
+layers:
+  nodejs:
+    package:
+      artifact: layers/nodejs.zip
+    name: ${opt:stage}-nodejs
+    compatibleRuntimes:
+      - nodejs16.x
+    compatibleArchitectures:
+      - x86_64
+      - arm64
+
+functions: #all the lambda functions are defined here
+  CreateUser: ${file(./resources/lambda/createUserLambda.yml)}
+  GetUser: ${file(./resources/lambda/getUserLambda.yml)}
+  GetAllUser: ${file(./resources/lambda/getAllUsersLambda.yml)}
+  UpdateUser: ${file(./resources/lambda/updateUserLambda.yml)}
+  DeleteUser: ${file(./resources/lambda/deleteUserLambda.yml)}
+
+resources:
+  Resources:
+    #the User table contains the details of the Users like, name,email,id, isDeleted etc..
+    UserTable: ${file(./resources/tables/UserTable.yml)}

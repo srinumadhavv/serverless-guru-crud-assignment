@@ -1,0 +1,15 @@
+name: get-user-${self:provider.stage}
+handler: src/lambdas/getUser/index.handler
+layers:
+  - { "Ref":  NodejsLambdaLayer}
+events: #this event will trigger defined lambda here to get the User info
+  - http:
+      path: /User/{userId}
+      method: GET
+      cors: true
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:GetItem
+    Resource:
+      - { Fn::GetAtt: [UserTable, Arn] }
