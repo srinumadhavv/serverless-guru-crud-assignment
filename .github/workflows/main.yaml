@@ -1,0 +1,37 @@
+name: serverless-guru-crud-assignment
+
+on:
+  push:
+    branches:
+      - master
+      - prod
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - name: Install Serverless Framework
+        run: npm install -g serverless
+
+      - name: install the dependencies
+        run: npm install
+        
+      - uses: aws-actions/configure-aws-credentials@v1 #added this step to configure aws credentials
+        with:
+          aws-access-key-id: ${{ secrets.ACCESS_KEY}}
+          aws-secret-access-key: ${{ secrets.SECRET_KEY }}
+          aws-region: us-east-1
+
+      - name: Deploy Stack To DEV Environment
+        if: endsWith(github.ref, '/master')
+        run: serverless deploy --stage dev
+
+      - name: Deploy Stack To Prod Environment
+        if: endsWith(github.ref, '/prod')
+        run: serverless deploy --stage prod
