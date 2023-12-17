@@ -3,8 +3,8 @@ This project implements a Serverless Framework REST API using AWS services for u
 
 ### Project Structure
 The project is organized into the following components:
-
-```├── __tests__
+```
+├── __tests__
 │  ├── test.createUser.js
 │  ├── test.deleteUser.js
 │  ├── test.getAllUsers.js
@@ -32,8 +32,8 @@ The project is organized into the following components:
     ├── getUser
     │  └── index.js
     └── updateUser
-      └── index.js```
-
+      └── index.js
+```
 - **Serverless Framework Config**: The serverless.yml file contains the configuration for the Serverless Framework, defining AWS resources and functions.
 - **Lambda Functions**: There are 5 Lambda functions, each responsible for a CRUD operation. These functions are implemented in Node.js.
 - **GitHub Actions Workflow**: The .github/workflows/main.yml file contains the GitHub Actions workflow for CI/CD.
@@ -76,8 +76,8 @@ serverless deploy --stage prod
 ### CI/CD Pipeline
 The CI/CD pipeline is set up using GitHub Actions. On every push to the master branch,Prod the workflow is triggered. The workflow includes steps for testing, and deployment.
 
-![tests] (../screenshots/devcicd.png)
-![tests] (../screenshots/prod-cicd.png)
+![tests] (screenshots/devcicd.png)
+![tests2] (screenshots/prod-cicd.png)
 
 ### Demo
 For a detailed walkthrough of the code, infrastructure, and additional features, please watch the demo video on Loom.
@@ -90,4 +90,4 @@ For a detailed walkthrough of the code, infrastructure, and additional features,
 
 - **Testing**: Unit tests can be found in the tests directory.
 
-![tests] (../screenshots/tests.png)
+![tests] (screenshots/tests.png)
