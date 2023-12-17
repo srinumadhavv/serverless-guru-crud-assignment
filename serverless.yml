@@ -1,4 +1,4 @@
-service: serverless-guru-crud-app
+service: serverless-guru-crud-app # name of the service
 frameworkVersion: "3"
 
 provider:
@@ -7,7 +7,7 @@ provider:
   region: us-east-1
   stage: ${opt:stage ,'dev'} 
   environment:
-    USER_TABLE: {"Ref": UserTable}
+    USER_TABLE: {"Ref": UserTable} # this will get the User table name from the resources/tables/UserTable.yml
 
 package:
   individually: true # package individual lambda 
@@ -32,14 +32,8 @@ layers:
       - x86_64
       - arm64
 
-functions: #all the lambda functions are defined here
-  CreateUser: ${file(./resources/lambda/createUserLambda.yml)}
-  GetUser: ${file(./resources/lambda/getUserLambda.yml)}
-  GetAllUser: ${file(./resources/lambda/getAllUsersLambda.yml)}
-  UpdateUser: ${file(./resources/lambda/updateUserLambda.yml)}
-  DeleteUser: ${file(./resources/lambda/deleteUserLambda.yml)}
+functions: # all the lambda functions are defined here
+  - ${file(./resources/lambda.yml)}
 
 resources:
-  Resources:
-    #the User table contains the details of the Users like, name,email,id, isDeleted etc..
-    UserTable: ${file(./resources/tables/UserTable.yml)}
+  - ${file(./resources/dynamodb.yml):resources}

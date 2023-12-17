@@ -26,7 +26,7 @@ module.exports.handler = async (event) => {
     };
     const params2 = {
       TableName: TABLE_NAME,
-      IndexName: "EmailGSI", // Assuming you have a Global Secondary Index named 'EmailIndex'
+      IndexName: "EmailGSI", // Global Secondary Index named 'EmailIndex'
       KeyConditionExpression: "email = :email",
       ExpressionAttributeValues: {
         ":email": email,
@@ -40,7 +40,7 @@ module.exports.handler = async (event) => {
         statusCode: 409,
         body: JSON.stringify({ message: "User already exists." }),
       };
-    }
+    } // Check if user Email already exists
 
     await dynamoDB.put(params).promise();
 

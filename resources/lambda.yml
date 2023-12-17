@@ -1,0 +1,90 @@
+CreateUser: 
+  name: create-user-${self:provider.stage}
+  handler: src/lambdas/createUser/index.handler
+  layers:
+    - { "Ref":  NodejsLambdaLayer}
+  events: #this event will trigger defined lambda here to create User in table
+    - http:
+        path: /User
+        method: POST
+        cors: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:Query
+      Resource:
+        - { Fn::GetAtt: [UserTable, Arn] }
+        - { Fn::Join: [ "/", [ Fn::GetAtt: [UserTable, Arn], "index/*" ] ] }
+
+GetUser: 
+  name: get-user-${self:provider.stage}
+  handler: src/lambdas/getUser/index.handler
+  layers:
+    - { "Ref":  NodejsLambdaLayer}
+  events: #this event will trigger defined lambda here to get the User info
+    - http:
+        path: /User/{userId}
+        method: GET
+        cors: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+      Resource:
+        - { Fn::GetAtt: [UserTable, Arn] }
+
+GetAllUser: 
+  name: get-all-users-${self:provider.stage}
+  handler: src/lambdas/getAllUsers/index.handler
+  layers:
+    - { "Ref":  NodejsLambdaLayer}
+  events: #this event will trigger defined lambda here to fetch all the User infos
+    - http:
+        path: /Users
+        method: GET
+        cors: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+      Resource: #getting the arn of the table and adding /index/* to allow to do query
+        - Fn::GetAtt: [UserTable, Arn]
+        - Fn::Join:
+            - "/"
+            - - Fn::GetAtt: [UserTable, Arn]
+              - "index/*"
+
+UpdateUser: 
+  name: update-user-${self:provider.stage}
+  handler: src/lambdas/updateUser/index.handler
+  layers:
+    - { "Ref":  NodejsLambdaLayer}
+  events: #this event will trigger defined lambda here to make api call for updating the User info
+    - http:
+        path: /User/{userId}
+        method: PUT
+        cors: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:UpdateItem
+      Resource:
+        - { Fn::GetAtt: [UserTable, Arn] }
+
+DeleteUser: 
+  name: delete-user-${self:provider.stage}
+  handler: src/lambdas/deleteUser/index.handler
+  layers:
+    - { "Ref":  NodejsLambdaLayer}
+  events: #this event will trigger defined lambda here to delete the User in table(soft delete)
+    - http:
+        path: /User/{userId}
+        method: DELETE
+        cors: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:UpdateItem
+      Resource:
+        - { Fn::GetAtt: [UserTable, Arn] }
