@@ -76,7 +76,7 @@ serverless deploy --stage prod
 ### CI/CD Pipeline
 The CI/CD pipeline is set up using GitHub Actions. On every push to the master branch,Prod the workflow is triggered. The workflow includes steps for testing, and deployment.
 
-![devcicd] (https://github.com/srinumadhavv/serverless-guru-crud-assignment/assets/43718077/4cc47980-fe07-4dd1-9554-ab48c9a04c9f)
+![devcicd](https://github.com/srinumadhavv/serverless-guru-crud-assignment/assets/43718077/4cc47980-fe07-4dd1-9554-ab48c9a04c9f)
 ![prod-cicd](https://github.com/srinumadhavv/serverless-guru-crud-assignment/assets/43718077/8cc18cc7-bc64-4cc2-9960-6d062f90c684)
 
 ### Demo
@@ -90,4 +90,4 @@ For a detailed walkthrough of the code, infrastructure, and additional features,
 
 - **Testing**: Unit tests can be found in the tests directory.
 
-![tests] (https://github.com/srinumadhavv/serverless-guru-crud-assignment/assets/43718077/e3c191cb-443c-4f11-b8a4-c328c56cfbb3)
+![tests](https://github.com/srinumadhavv/serverless-guru-crud-assignment/assets/43718077/e3c191cb-443c-4f11-b8a4-c328c56cfbb3)
