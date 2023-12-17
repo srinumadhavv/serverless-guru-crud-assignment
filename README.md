@@ -84,7 +84,7 @@ If you want to use the APIs and test in postman use the below API:
 
 ```
 DEV: https://cyz3m4frrl.execute-api.us-east-1.amazonaws.com/dev
-PROD: https://gh761wl0h5.execute-api.us-east-1.amazonaws.com/prod/
+PROD: https://rbfbhv7c7d.execute-api.us-east-1.amazonaws.com/prod/
 ```
 ### Demo
 For a detailed walkthrough of the code, infrastructure, and additional features, please watch the demo video on Loom.
