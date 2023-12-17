@@ -1,4 +1,4 @@
-# User Management API with Serverless Framework and AWS
+# User Management APIs with Serverless Framework and AWS
 This project implements a Serverless Framework REST API using AWS services for user management. The API supports CRUD functionality (Create, Read, Update, Delete) for user records stored in DynamoDB. The CI/CD pipeline is set up using GitHub Actions, deploying to multiple stages such as dev and prod. 
 
 ### Project Structure
@@ -79,6 +79,13 @@ The CI/CD pipeline is set up using GitHub Actions. On every push to the master b
 ![devcicd](https://github.com/srinumadhavv/serverless-guru-crud-assignment/assets/43718077/4cc47980-fe07-4dd1-9554-ab48c9a04c9f)
 ![prod-cicd](https://github.com/srinumadhavv/serverless-guru-crud-assignment/assets/43718077/8cc18cc7-bc64-4cc2-9960-6d062f90c684)
 
+### API URL
+If you want to use the APIs and test in postman use the below API:
+
+```
+DEV: https://cyz3m4frrl.execute-api.us-east-1.amazonaws.com/dev
+PROD: https://gh761wl0h5.execute-api.us-east-1.amazonaws.com/prod/
+```
 ### Demo
 For a detailed walkthrough of the code, infrastructure, and additional features, please watch the demo video on Loom.
 
